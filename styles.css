@@ -1,0 +1,50 @@
+main{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+.scoreboard {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.scoreboard div {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center; 
+  background-color: darkgrey;
+  border: 2px solid black;
+}
+.game-board{
+  margin-top: 50px;
+  width: 300px;
+  height: 300px;
+  display: grid;
+  column-gap: 10px;
+  row-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+.game-board div {
+  background-color: rgb(156, 144, 144);
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  cursor: pointer;
+}
+.game-status {
+  margin: 25px 0;
+}
