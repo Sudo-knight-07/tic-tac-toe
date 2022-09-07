@@ -1,33 +1,40 @@
-main{
+main {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
 }
+
 .heading {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
 }
+
 .scoreboard {
-  margin-top: 20px;
+  margin-top: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
 .scoreboard div {
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   width: 100px;
   height: 50px;
   display: flex;
-  align-items: center; 
-  background-color: darkgrey;
+  align-items: center;
+  background-color: rgb(203, 192, 192);
   border: 2px solid black;
+  border-radius: 10px;
+  margin-bottom: 2px;
+  margin-right: 2px;
 }
-.game-board{
-  margin-top: 50px;
+
+.game-board {
+  margin-top: 30px;
   width: 300px;
   height: 300px;
   display: grid;
@@ -36,15 +43,38 @@ main{
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
+
 .game-board div {
-  background-color: rgb(156, 144, 144);
+  background-color: cornflowerblue;
   border: 2px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 50px;
   cursor: pointer;
+  border-radius: 10px;
 }
+
 .game-status {
-  margin: 25px 0;
+  margin: 5px 0;
+}
+
+.reset-btn {
+  font: bold;
+  font-size: larger;
+  width: 20vw;
+  height: 5vh;
+  border-radius: 10px;
+  background-color: midnightblue;
+  color: white;
+}
+
+.blink {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }

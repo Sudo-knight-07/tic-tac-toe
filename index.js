@@ -1,9 +1,7 @@
 const cells = document.querySelectorAll('.game-board div');
 const reset = document.querySelector('.reset-btn')
 
-
-
-const gameStatus = document.querySelector('.game-status');
+const gameStatus = document.querySelector('.game-status h2');
 
 let gameActive = true;
 
@@ -23,16 +21,23 @@ const winningConditions = [
 ]
 
 const winMessage = () => `Player ${currentPlayer} has won!`;
-const drawMessage = () => `Game eneded in draw`;
+const drawMessage = () => `Game ended in draw`;
 const currentPlayerTurn = () => `It's ${currentPlayer} turn`;
 
 gameStatus.innerHTML = currentPlayerTurn();
+gameStatus.style.color = "red"
 
 
 
 const handleCellPlayed = (clickedCell, clickedCellIndex) => {
   gameState[clickedCellIndex] = currentPlayer;
   clickedCell.innerHTML = currentPlayer;
+  // change color of cells on input X or O
+  if(clickedCell.innerHTML === "X"){
+    clickedCell.style.backgroundColor = "coral"
+  } else if(clickedCell.innerHTML === "O"){
+    clickedCell.style.backgroundColor = "cyan"
+  }
 }
 
 
@@ -51,6 +56,10 @@ const handleResultValidation = () => {
     }
     if (a === b && b === c) {
       roundWon = true;
+      // flashing out the win condition cells
+      winCondition.forEach((cellIndex) => {
+        cells[cellIndex].classList.add('blink');
+      })
       break;
     }
   }
@@ -65,6 +74,7 @@ const handleResultValidation = () => {
     }
 
     gameStatus.innerHTML = winMessage();
+    gameStatus.style.color = "green";
     gameActive = false;
     return;
   }
@@ -73,6 +83,7 @@ const handleResultValidation = () => {
   let roundDraw = !gameState.includes("");
   if (roundDraw) {
     gameStatus.innerHTML = drawMessage();
+    gameStatus.style.color = "blue";
     gameActive = false;
     return;
   }
@@ -81,6 +92,7 @@ const handleResultValidation = () => {
 
   currentPlayer = currentPlayer === "X" ? "O" : "X";
   gameStatus.innerHTML = currentPlayerTurn();
+  gameStatus.style.color = "red";
 }
 
 
@@ -89,9 +101,6 @@ cells.forEach((cell) => {
   cell.addEventListener('click', (clickedCellEvent) => {
     const clickedCell = clickedCellEvent.target;
     const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
-    
-    //testing
-    // console.log(clickedCellIndex);
 
     if (gameState[clickedCellIndex] !== "" || !gameActive) {
       return
@@ -108,16 +117,12 @@ reset.addEventListener('click', () => {
   currentPlayer = "X";
   gameState = ["", "", "", "", "", "", "", "", ""];
   gameStatus.innerHTML = currentPlayerTurn();
+  gameStatus.style.color = "red"
   cells.forEach(cell => {
     cell.innerHTML = "";
+    cell.style.backgroundColor = "cornflowerblue";
+    if(cell.classList.contains('blink')) {
+      cell.classList.remove('blink')
+    }
   })
 });
-
-
-// cells = document.querySelectorAll('.cells')
-// cells.forEach(cell => {
-//   console.log(cell)
-//   if (cell.innerText === "X") {
-//     cell.style.backgroundColor = "#00FF00"
-//   }
-// })
